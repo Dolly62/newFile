@@ -17,10 +17,26 @@ function saveUserInput(event) {
     localStorage.setItem('userInfo', JSON.stringify(userDetail));
     showUserOnScreen(userDetail)
 }
+
 function showUserOnScreen(userDetail) {
     const parentitem = document.getElementById('listOfItems');
-    parentitem.innerHTML = parentitem.innerHTML + `<li>${userDetail.currentName} - ${userDetail.currentEmail} - ${userDetail.currentPhoneNumber}</li>`
+    const childItem = document.createElement('li');
+    childItem.textContent = userDetail.currentName + ' - ' + userDetail.currentEmail + ' - ' + userDetail.currentPhoneNumber;
+
+    const deleteButton = document.createElement('input')
+    deleteButton.type = 'button'
+    deleteButton.value = 'Delete'
+    deleteButton.onclick = () => {
+        localStorage.removeItem(userDetail.currentEmail);
+        parentitem.removeChild(childItem);
+    }
+
+    childItem.appendChild(deleteButton);
+    parentitem.appendChild(childItem);
 }
+
+
+
 
 
 
