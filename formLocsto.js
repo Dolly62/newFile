@@ -10,13 +10,35 @@ function saveUserInput(event) {
 
     }
 
+    // AXIOS
+    axios.post("https://crudcrud.com/api/ab09b501f5b74ffc94f2859c28cdc647/appointmentData", userDetail)
+    .then((respone) => {
+        showUserOnScreen(respone.data)
+        // console.log(respone)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
     //store the user data
     // const userInput = localStorage.setItem('currentName', currentName);
     // const userEmail = localStorage.setItem('currentEmail', currentEmail);
     // const userPhoneNumber = localStorage.setItem('currentPhoneNumber', currentPhoneNumber);
-    localStorage.setItem('userInfo', JSON.stringify(userDetail));
-    showUserOnScreen(userDetail)
+    // localStorage.setItem('userInfo', JSON.stringify(userDetail));
+    // showUserOnScreen(userDetail)
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    const localStorageObj = localStorage;
+    const localStoragekeys = Object.keys(localStorageObj)
+
+    for(var i=0; i<localStoragekeys.length; i++){
+        const key = localStoragekeys[i]
+        const userDetailsString = localStorageObj[key];
+        const userDetailObj = JSON.parse(userDetailsString);
+        showUserOnScreen(userDetailObj)
+    }
+})
 
 function showUserOnScreen(userDetail) {
     const parentitem = document.getElementById('listOfItems');
@@ -32,6 +54,18 @@ function showUserOnScreen(userDetail) {
     }
 
     childItem.appendChild(deleteButton);
+    parentitem.appendChild(childItem);
+
+
+    const editButton = document.createElement('input')
+    editButton.type = 'button'
+    editButton.value = 'Edit'
+    editButton.onclick = () => {
+        localStorage.removeItem(userDetail.currentEmail);
+        parentitem.removeChild(childItem);
+    }
+
+    childItem.appendChild(editButton);
     parentitem.appendChild(childItem);
 }
 
