@@ -12,13 +12,15 @@ function saveUserInput(event) {
 
     // AXIOS
     axios.post("https://crudcrud.com/api/ab09b501f5b74ffc94f2859c28cdc647/appointmentData", userDetail)
-    .then((respone) => {
-        showUserOnScreen(respone.data)
+    .then((response) => {
+        showUserOnScreen(response.data)
         // console.log(respone)
     })
     .catch((err) => {
         console.log(err)
     })
+
+
 
     //store the user data
     // const userInput = localStorage.setItem('currentName', currentName);
@@ -29,15 +31,27 @@ function saveUserInput(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    const localStorageObj = localStorage;
-    const localStoragekeys = Object.keys(localStorageObj)
+    axios.get("https://crudcrud.com/api/ab09b501f5b74ffc94f2859c28cdc647/appointmentData")
+    .then((response) => {
+        console.log(response)
+        for(var i=0; i< response.data.length; i++){
+            showUserOnScreen(response.data[i])
+        }
+    })
 
-    for(var i=0; i<localStoragekeys.length; i++){
-        const key = localStoragekeys[i]
-        const userDetailsString = localStorageObj[key];
-        const userDetailObj = JSON.parse(userDetailsString);
-        showUserOnScreen(userDetailObj)
-    }
+    .catch((err) => {
+        console.log(err)
+    })
+
+    // const localStorageObj = localStorage;
+    // const localStoragekeys = Object.keys(localStorageObj)
+
+    // for(var i=0; i<localStoragekeys.length; i++){
+    //     const key = localStoragekeys[i]
+    //     const userDetailsString = localStorageObj[key];
+    //     const userDetailObj = JSON.parse(userDetailsString);
+    //     showUserOnScreen(userDetailObj)
+    // }
 })
 
 function showUserOnScreen(userDetail) {
