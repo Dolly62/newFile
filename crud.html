@@ -15,7 +15,11 @@
   <body>
     <div class="container">
       <h1 class="mt-2 mb-2 text-center">Registration Form</h1>
-      <form id="addForm" class="form-inline mb-3" onsubmit="saveUserInput(event)">
+      <form
+        id="addForm"
+        class="form-inline mb-3"
+        onsubmit="saveUserInput(event)"
+      >
         <div class="col">
           <div class="form-group col-md-6 mb-3">
             <label for="name">Name:</label>
@@ -37,15 +41,15 @@
               placeholder="Enter name...."
             />
           </div>
-          <button class="btn btn-success" id="Submit" >Submit</button>
+          <button class="btn btn-success" id="Submit">Submit</button>
         </div>
       </form>
     </div>
-    <hr/>
+    <hr />
     <div class="Items">
-     <ol id="listOfItems"></ol>
+      <ol id="listOfItems"></ol>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-<script src="crud.js"></script>  
-</body>
+    <script src="crud.js"></script>
+  </body>
 </html>
